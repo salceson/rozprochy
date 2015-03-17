@@ -6,7 +6,7 @@ Laboratoria z systemów rozproszonych.
 
 Zadania:
 
-* Zad1 - Przesyłanie liczb całkowitych o różnej długości
+* Zad1 - Przesyłanie liczb całkowitych o różnej długości.
 * Zad2 - Przesyłanie zawartości pliku.
 * Zad3 - Chat multicastowy.
  
