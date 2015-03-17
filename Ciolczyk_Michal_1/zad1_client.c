@@ -3,6 +3,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void usage();
 
@@ -78,6 +79,7 @@ int main(int argc, char **argv) {
     }
 
     free(buffer);
+    close(sck);
 
     return 0;
 }
