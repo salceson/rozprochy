@@ -18,7 +18,7 @@ int sck;
 int main(int argc, char **argv) {
     printf("Zad 1 Client\n(C) 2015 Michał Ciołczyk\n\n");
 
-    if(argc != 2) {
+    if (argc != 2) {
         usage();
         return 1;
     }
@@ -34,31 +34,31 @@ int main(int argc, char **argv) {
     //Initializing socket & connecting
     sck = socket(AF_INET, SOCK_STREAM, 0);
 
-    bzero((char*) &sockaddrIn, sizeof(sockaddrIn));
+    bzero((char *) &sockaddrIn, sizeof(sockaddrIn));
 
     sockaddrIn.sin_family = AF_INET;
     sockaddrIn.sin_port = htons((uint16_t) atoi("6666"));
     sockaddrIn.sin_addr.s_addr = inet_addr(argv[1]);
 
-    if (0 != connect(sck, (struct sockaddr *) &sockaddrIn, sizeof(struct sockaddr_in))){
+    if (0 != connect(sck, (struct sockaddr *) &sockaddrIn, sizeof(struct sockaddr_in))) {
         perror("Cannot connect to address");
         return 2;
     }
 
     //Main loop
-    while(!end){
+    while (!end) {
         menu();
 
         scanf("%s", buffer);
 
-        if(0 == strcmp(buffer, "q")) {
+        if (0 == strcmp(buffer, "q")) {
             end = true;
         }
-        else if(0 == strcmp(buffer, "1")) {
+        else if (0 == strcmp(buffer, "1")) {
             scanf("%lld", &num);
             uint8_t toSend = (uint8_t) num;
 
-            if(send(sck, &toSend, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
+            if (send(sck, &toSend, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
                 perror("Send failed");
                 close(sck);
                 return 3;
@@ -66,11 +66,11 @@ int main(int argc, char **argv) {
 
             receive_num();
         }
-        else if(0 == strcmp(buffer, "2")) {
+        else if (0 == strcmp(buffer, "2")) {
             scanf("%lld", &num);
             uint16_t toSend = (uint16_t) num;
 
-            if(send(sck, &toSend, sizeof(uint16_t), 0) != sizeof(uint16_t)) {
+            if (send(sck, &toSend, sizeof(uint16_t), 0) != sizeof(uint16_t)) {
                 perror("Send failed");
                 close(sck);
                 return 3;
@@ -78,11 +78,11 @@ int main(int argc, char **argv) {
 
             receive_num();
         }
-        else if(0 == strcmp(buffer, "4")) {
+        else if (0 == strcmp(buffer, "4")) {
             scanf("%lld", &num);
             uint32_t toSend = (uint32_t) num;
 
-            if(send(sck, &toSend, sizeof(uint32_t), 0) != sizeof(uint32_t)) {
+            if (send(sck, &toSend, sizeof(uint32_t), 0) != sizeof(uint32_t)) {
                 perror("Send failed");
                 close(sck);
                 return 3;
@@ -90,11 +90,11 @@ int main(int argc, char **argv) {
 
             receive_num();
         }
-        else if(0 == strcmp(buffer, "8")) {
+        else if (0 == strcmp(buffer, "8")) {
             scanf("%lld", &num);
             uint64_t toSend = (uint64_t) num;
 
-            if(send(sck, &toSend, sizeof(uint64_t), 0) != sizeof(uint64_t)) {
+            if (send(sck, &toSend, sizeof(uint64_t), 0) != sizeof(uint64_t)) {
                 perror("Send failed");
                 close(sck);
                 return 3;
@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
 void receive_num() {
     uint8_t buffer;
 
-    if(recv(sck, &buffer, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
+    if (recv(sck, &buffer, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
         perror("Recv failed");
         close(sck);
         exit(4);
