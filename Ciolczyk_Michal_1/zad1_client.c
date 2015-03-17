@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     }
 
     //Socket variables
-    struct sockaddr_in serv_addr;
+    struct sockaddr_in sockaddrIn;
 
     //Program variables
     bool end = false;
@@ -34,13 +34,13 @@ int main(int argc, char **argv) {
     //Initializing socket & connecting
     sck = socket(AF_INET, SOCK_STREAM, 0);
 
-    bzero((char*) &serv_addr, sizeof(serv_addr));
+    bzero((char*) &sockaddrIn, sizeof(sockaddrIn));
 
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons((uint16_t) atoi("6666"));
-    serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
+    sockaddrIn.sin_family = AF_INET;
+    sockaddrIn.sin_port = htons((uint16_t) atoi("6666"));
+    sockaddrIn.sin_addr.s_addr = inet_addr(argv[1]);
 
-    if (0 != connect(sck, (struct sockaddr *) &serv_addr, sizeof(struct sockaddr_in))){
+    if (0 != connect(sck, (struct sockaddr *) &sockaddrIn, sizeof(struct sockaddr_in))){
         perror("Cannot connect to address");
         return 2;
     }
@@ -119,7 +119,7 @@ void receive_num() {
         exit(4);
     }
 
-    printf("Got number: %d", (int) buffer);
+    printf("Got number: %d\n\n", (int) buffer);
 }
 
 void menu() {
