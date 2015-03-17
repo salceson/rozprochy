@@ -10,10 +10,6 @@ static const int BUFFER_SIZE = 255;
 
 void usage();
 
-void receive_num();
-
-//Socket variables
-int sck;
 
 int main(int argc, char **argv) {
     printf("Zad 2 Client\n(C) 2015 Michał Ciołczyk\n\n");
@@ -25,6 +21,7 @@ int main(int argc, char **argv) {
 
     //Socket variables
     struct sockaddr_in sockaddrIn;
+    int sck;
 
     //Program variables
     char *buffer = malloc(BUFFER_SIZE * sizeof(char));
