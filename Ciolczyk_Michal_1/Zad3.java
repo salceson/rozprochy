@@ -136,7 +136,6 @@ public class Zad3 {
                         String message = messageBuilder.toString();
 
                         //Receive date
-                        //Receive name
                         StringBuilder dateBuilder = new StringBuilder();
                         for (int i = 0; i < DATE_SIZE; i++) {
                             byte b = byteBuffer.get();
