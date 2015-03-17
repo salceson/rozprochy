@@ -3,8 +3,6 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
 
 void usage();
 
@@ -27,7 +25,6 @@ int main(int argc, char **argv) {
     struct sockaddr_in sockaddrIn;
 
     //Program variables
-    bool end = false;
     unsigned long long num;
     char *buffer = malloc(255 * sizeof(char));
 
