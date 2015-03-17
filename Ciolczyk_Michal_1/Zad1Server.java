@@ -39,7 +39,7 @@ public class Zad1Server {
 
                 switch (receivedBytes) {
                     case 1:
-                        System.out.println(byteBuffer.get(0));
+                        System.out.println(byteBuffer.get());
                         break;
                     case 2:
                         System.out.println(byteBuffer.getShort());
