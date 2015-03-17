@@ -24,17 +24,15 @@ public class Zad1Server {
                 Socket socket = serverSocket.accept();
                 InputStream in = socket.getInputStream();
                 OutputStream out = socket.getOutputStream();
-                byte[] receive = new byte[8];
-                for(int i=0; i<8; i++)
-                    receive[i] = 0;
+                byte[] received = new byte[8];
 
-                int receivedBytes = in.read(receive);
+                int receivedBytes = in.read(received);
 
                 System.out.print("Received bytes: ");
                 System.out.println(receivedBytes);
                 System.out.print("Received data: ");
 
-                ByteBuffer byteBuffer = ByteBuffer.wrap(receive);
+                ByteBuffer byteBuffer = ByteBuffer.wrap(received);
 
                 switch (receivedBytes) {
                     case 1:
@@ -49,6 +47,8 @@ public class Zad1Server {
                     case 8:
                         System.out.println(byteBuffer.getLong());
                         break;
+                    default:
+                        System.out.println();
                 }
 
                 byte[] send = ByteBuffer.allocate(1).put(Integer.valueOf(random.nextInt(10)).byteValue()).array();
