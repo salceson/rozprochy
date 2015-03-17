@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 
     //Program variables
     bool end = false;
-    long long num;
+    unsigned long long num;
     char *buffer = malloc(255 * sizeof(char));
 
     //Initializing socket & connecting
@@ -46,79 +46,48 @@ int main(int argc, char **argv) {
     }
 
     //Main loop
-    while (!end) {
-        menu();
 
-        scanf("%s", buffer);
+    menu();
 
-        if (0 == strcmp(buffer, "q")) {
-            end = true;
-        }
-        else if (0 == strcmp(buffer, "1")) {
-            scanf("%lld", &num);
-            uint8_t toSend = (uint8_t) num;
+    scanf("%s", buffer);
 
-            if (send(sck, &toSend, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
-                perror("Send failed");
-                close(sck);
-                return 3;
-            }
-
-            receive_num();
-        }
-        else if (0 == strcmp(buffer, "2")) {
-            scanf("%lld", &num);
-            uint16_t toSend = (uint16_t) num;
-
-            if (send(sck, &toSend, sizeof(uint16_t), 0) != sizeof(uint16_t)) {
-                perror("Send failed");
-                close(sck);
-                return 3;
-            }
-
-            receive_num();
-        }
-        else if (0 == strcmp(buffer, "4")) {
-            scanf("%lld", &num);
-            uint32_t toSend = (uint32_t) num;
-
-            if (send(sck, &toSend, sizeof(uint32_t), 0) != sizeof(uint32_t)) {
-                perror("Send failed");
-                close(sck);
-                return 3;
-            }
-
-            receive_num();
-        }
-        else if (0 == strcmp(buffer, "8")) {
-            scanf("%lld", &num);
-            uint64_t toSend = (uint64_t) num;
-
-            if (send(sck, &toSend, sizeof(uint64_t), 0) != sizeof(uint64_t)) {
-                perror("Send failed");
-                close(sck);
-                return 3;
-            }
-
-            receive_num();
-        }
+    if (0 == strcmp(buffer, "1")) {
+        printf("Enter number to send: ");
+        scanf("%llu", &num);
+        uint8_t toSend = (uint8_t) num;
+        send(sck, &toSend, sizeof(uint8_t), 0);
+        receive_num();
+    }
+    else if (0 == strcmp(buffer, "2")) {
+        printf("Enter number to send: ");
+        scanf("%llu", &num);
+        uint16_t toSend = (uint16_t) num;
+        send(sck, &toSend, sizeof(uint16_t), 0);
+        receive_num();
+    }
+    else if (0 == strcmp(buffer, "4")) {
+        printf("Enter number to send: ");
+        scanf("%llu", &num);
+        uint32_t toSend = (uint32_t) num;
+        send(sck, &toSend, sizeof(uint32_t), 0);
+        receive_num();
+    }
+    else if (0 == strcmp(buffer, "8")) {
+        printf("Enter number to send: ");
+        scanf("%llu", &num);
+        uint64_t toSend = (uint64_t) num;
+        send(sck, &toSend, sizeof(uint64_t), 0);
+        receive_num();
     }
 
     free(buffer);
-    close(sck);
 
     return 0;
 }
 
 void receive_num() {
     uint8_t buffer;
-
-    if (recv(sck, &buffer, sizeof(uint8_t), 0) != sizeof(uint8_t)) {
-        perror("Recv failed");
-        close(sck);
-        exit(4);
-    }
-
+    recv(sck, &buffer, sizeof(uint8_t), 0);
     printf("Got number: %d\n\n", (int) buffer);
 }
 
