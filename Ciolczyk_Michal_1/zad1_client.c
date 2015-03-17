@@ -51,29 +51,29 @@ int main(int argc, char **argv) {
     if (0 == strcmp(buffer, "1")) {
         printf("Enter number to send: ");
         scanf("%llu", &num);
-        uint8_t toSend = (uint8_t) num;
-        send(sck, &toSend, sizeof(uint8_t), 0);
+        int8_t toSend = (int8_t) num;
+        send(sck, &toSend, sizeof(int8_t), 0);
         receive_num();
     }
     else if (0 == strcmp(buffer, "2")) {
         printf("Enter number to send: ");
         scanf("%llu", &num);
-        uint16_t toSend = (uint16_t) num;
-        send(sck, &toSend, sizeof(uint16_t), 0);
+        int16_t toSend = htobe16((int16_t) num);
+        send(sck, &toSend, sizeof(int16_t), 0);
         receive_num();
     }
     else if (0 == strcmp(buffer, "4")) {
         printf("Enter number to send: ");
         scanf("%llu", &num);
-        uint32_t toSend = (uint32_t) num;
-        send(sck, &toSend, sizeof(uint32_t), 0);
+        int32_t toSend = htobe32((int32_t) num);
+        send(sck, &toSend, sizeof(int32_t), 0);
         receive_num();
     }
     else if (0 == strcmp(buffer, "8")) {
         printf("Enter number to send: ");
         scanf("%llu", &num);
-        uint64_t toSend = (uint64_t) num;
-        send(sck, &toSend, sizeof(uint64_t), 0);
+        int64_t toSend = htobe64((int64_t) num);
+        send(sck, &toSend, sizeof(int64_t), 0);
         receive_num();
     }
 

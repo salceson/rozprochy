@@ -1,8 +1,6 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.Byte;
-import java.lang.Exception;
 import java.lang.System;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -28,6 +26,8 @@ public class Zad1Server {
                 InputStream in = socket.getInputStream();
                 OutputStream out = socket.getOutputStream();
                 byte[] receive = new byte[8];
+                for(int i=0; i<8; i++)
+                    receive[i] = 0;
 
                 int receivedBytes = in.read(receive);
 
@@ -35,18 +35,20 @@ public class Zad1Server {
                 System.out.println(receivedBytes);
                 System.out.print("Received data: ");
 
+                ByteBuffer byteBuffer = ByteBuffer.wrap(receive);
+
                 switch (receivedBytes) {
                     case 1:
-                        System.out.println((int) ByteBuffer.wrap(receive).getChar() / 64);
+                        System.out.println(byteBuffer.get(0));
                         break;
                     case 2:
-                        System.out.println(ByteBuffer.wrap(receive).getShort() / 256);
+                        System.out.println(byteBuffer.getShort());
                         break;
                     case 4:
-                        System.out.println(ByteBuffer.wrap(receive).getInt() / 512);
+                        System.out.println(byteBuffer.getInt());
                         break;
                     case 8:
-                        System.out.println(ByteBuffer.wrap(receive).getLong());
+                        System.out.println(byteBuffer.getLong());
                         break;
                 }
 
