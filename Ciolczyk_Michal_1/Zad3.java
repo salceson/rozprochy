@@ -47,9 +47,9 @@ public class Zad3 {
                 byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
 
                 //Send name
-                System.arraycopy(nameBytes, 0, packetBuffer, 0, min(USERNAME_SIZE, nameBytes.length));
+                System.arraycopy(nameBytes, 0, packetBuffer, 0, Math.min(USERNAME_SIZE, nameBytes.length));
                 //Send message
-                System.arraycopy(lineBytes, 0, packetBuffer, USERNAME_SIZE, min(MESSAGE_SIZE, lineBytes.length));
+                System.arraycopy(lineBytes, 0, packetBuffer, USERNAME_SIZE, Math.min(MESSAGE_SIZE, lineBytes.length));
                 //Send date
                 System.arraycopy(dateFormat.format(new Date()).getBytes(StandardCharsets.US_ASCII),
                         0, packetBuffer, USERNAME_SIZE + MESSAGE_SIZE, DATE_SIZE);
@@ -84,10 +84,6 @@ public class Zad3 {
         return checksum == calculateChecksum(packetWithoutChecksum);
     }
 
-    public static int min(int a, int b) {
-        return (a < b) ? a : b;
-    }
-
     public static class Receiver extends Thread {
         private MulticastSocket socket;
         private String name;
@@ -110,41 +106,18 @@ public class Zad3 {
 
                     if (validateChecksum(data)) {
                         ByteBuffer byteBuffer = ByteBuffer.wrap(data);
-
                         //Receive name
-                        StringBuilder nameBuilder = new StringBuilder();
-                        for (int i = 0; i < USERNAME_SIZE; i++) {
-                            byte b = byteBuffer.get();
-                            if (b != 0) {
-                                nameBuilder.append((char) b);
-                            }
-                        }
-                        String userName = nameBuilder.toString();
-
+                        String userName = getStringWithSpecifiedLength(byteBuffer, USERNAME_SIZE);
+                        //If it was send by the current user, skip it
                         if (name.equals(userName)) {
                             continue;
                         }
-
                         //Receive message
-                        StringBuilder messageBuilder = new StringBuilder();
-                        for (int i = 0; i < MESSAGE_SIZE; i++) {
-                            byte b = byteBuffer.get();
-                            if (b != 0) {
-                                messageBuilder.append((char) b);
-                            }
-                        }
-                        String message = messageBuilder.toString();
-
+                        String message = getStringWithSpecifiedLength(byteBuffer, MESSAGE_SIZE);
                         //Receive date
-                        StringBuilder dateBuilder = new StringBuilder();
-                        for (int i = 0; i < DATE_SIZE; i++) {
-                            byte b = byteBuffer.get();
-                            if (b != 0) {
-                                dateBuilder.append((char) b);
-                            }
-                        }
-                        String date = dateBuilder.toString();
+                        String date = getStringWithSpecifiedLength(byteBuffer, DATE_SIZE);
 
+                        //Display message
                         System.out.println(String.format("\r%s[%s]: %s", userName, date, message));
                     } else {
                         System.out.println("\r[ERROR] Got message with invalid checksum!");
@@ -155,6 +128,17 @@ public class Zad3 {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        private String getStringWithSpecifiedLength(ByteBuffer byteBuffer, int length) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < length; i++) {
+                byte b = byteBuffer.get();
+                if (b != 0) {
+                    sb.append((char) b);
+                }
+            }
+            return sb.toString();
         }
     }
 }
