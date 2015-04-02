@@ -10,3 +10,6 @@ Zadania:
 * Zad2 - Przesyłanie zawartości pliku.
 * Zad3 - Chat multicastowy.
  
+## Laboratorium 2 - JGroups
+
+Zadanie: chat.
