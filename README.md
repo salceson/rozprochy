@@ -16,4 +16,4 @@ Zadanie: Chat Multicastowy
 
 ## Laboratorium 3 - RMI
 
-Zadanie: Gra w statki
+Zadanie: Gra w kółko i krzyżyk
