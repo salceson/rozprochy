@@ -5,6 +5,7 @@ import pl.edu.agh.ki.dsrg.rmi.tictactoe.broker.BoardBroker;
 import pl.edu.agh.ki.dsrg.rmi.tictactoe.player.HumanPlayer;
 
 import java.rmi.NotBoundException;
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -37,6 +38,7 @@ public class Client {
         }
 
         try {
+            System.setSecurityManager(new RMISecurityManager());
             System.out.println("Connecting to server...");
             HumanPlayer player = new HumanPlayer(nick);
             Registry registry = LocateRegistry.getRegistry(host, Integer.parseInt(port));
