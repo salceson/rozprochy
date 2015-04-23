@@ -82,10 +82,28 @@ public class BoardBrokerImpl implements BoardBroker {
         @Override
         public void run() {
             try {
+                String player1Nick = player1.getNick();
+                String player2Nick = player2.getNick();
+                System.out.println("Starting game between:");
+                System.out.println("\t0: " + player1Nick);
+                System.out.println("\t1: " + player2Nick);
+                System.out.println("\tPlayer " + firstPlayer + " starts!");
                 BoardImpl board = new BoardImpl(player1, player2, firstPlayer);
-                player1.onGameStarted(board, firstPlayer == 0);
-                player2.onGameStarted(board, firstPlayer == 1);
+                switch (firstPlayer) {
+                    case 0:
+                        player2.onGameStarted(board, false);
+                        player1.onGameStarted(board, true);
+                        break;
+                    case 1:
+                        player1.onGameStarted(board, false);
+                        player2.onGameStarted(board, true);
+                        break;
+                }
                 board.waitForFinish();
+                System.out.println("Game between:");
+                System.out.println("\t0: " + player1Nick);
+                System.out.println("\t1: " + player2Nick);
+                System.out.println("finished!");
             } catch (RemoteException | InterruptedException e) {
                 e.printStackTrace();
             }

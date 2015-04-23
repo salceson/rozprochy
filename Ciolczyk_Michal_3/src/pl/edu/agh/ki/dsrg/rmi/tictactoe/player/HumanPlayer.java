@@ -44,6 +44,8 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
         System.out.println("Game started!");
         symbol = hasFirstMove ? " O " : " X ";
         enemySymbol = hasFirstMove ? " X " : " O ";
+        System.out.println("You're" + symbol);
+        printBoard();
         if (hasFirstMove) {
             Move move;
             do {
