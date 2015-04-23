@@ -53,6 +53,6 @@ public class Client {
     }
 
     private static void usage() {
-        System.out.println("Usage: java Client <HOST> <PORT> <NICK> <ENEMY TYPE: human|computer> <VISIBLE-LOCALHOST>");
+        System.out.println("Usage: java Client <HOST> <PORT> <NICK> <ENEMY TYPE: human|computer>");
     }
 }
