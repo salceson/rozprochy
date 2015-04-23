@@ -21,8 +21,8 @@ public class Server {
         }
         System.setProperty("java.rmi.server.hostname", args[0]);
         try {
-            boardBroker = new BoardBrokerImpl();
-            UnicastRemoteObject.exportObject(boardBroker, 0);
+            BoardBroker boardBrokerImpl = new BoardBrokerImpl();
+            boardBroker = (BoardBroker) UnicastRemoteObject.exportObject(boardBrokerImpl, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind("broker", boardBroker);
         } catch (RemoteException e) {
