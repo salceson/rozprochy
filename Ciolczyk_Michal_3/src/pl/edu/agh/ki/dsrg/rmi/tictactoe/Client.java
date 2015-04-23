@@ -14,7 +14,7 @@ import java.rmi.registry.Registry;
  */
 public class Client {
     public static void main(String[] args) {
-        if (args.length < 5) {
+        if (args.length < 4) {
             usage();
             return;
         }
@@ -22,7 +22,6 @@ public class Client {
         String port = args[1];
         String nick = args[2];
         String enemyTypeString = args[3];
-        String visibleLocalhost = args[4];
         EnemyType enemyType;
 
         switch (enemyTypeString) {
@@ -38,7 +37,6 @@ public class Client {
         }
 
         try {
-            System.setProperty("java.rmi.server.hostname", visibleLocalhost);
             System.out.println("Connecting to server...");
             HumanPlayer player = new HumanPlayer(nick);
             Registry registry = LocateRegistry.getRegistry(host, Integer.parseInt(port));
