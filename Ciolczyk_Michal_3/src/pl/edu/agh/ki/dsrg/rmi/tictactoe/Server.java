@@ -15,7 +15,11 @@ public class Server {
     static BoardBroker boardBroker;
 
     public static void main(String[] args) {
-        System.setProperty("java.rmi.server.hostname", "178.62.197.11");
+        if (args.length < 1) {
+            System.out.println("Usage: java Server <VISIBLE-HOST>");
+            return;
+        }
+        System.setProperty("java.rmi.server.hostname", args[0]);
         try {
             boardBroker = new BoardBrokerImpl();
             UnicastRemoteObject.exportObject(boardBroker, 0);
