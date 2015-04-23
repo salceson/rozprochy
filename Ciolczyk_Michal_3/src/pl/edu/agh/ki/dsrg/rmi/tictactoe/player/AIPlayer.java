@@ -33,7 +33,7 @@ public class AIPlayer extends UnicastRemoteObject implements Player {
     }
 
     @Override
-    public void onEnemyMove(Board board, Move move) {
+    public void onEnemyMove(Board board, Move move) throws RemoteException {
         Move myMove;
         try {
             do {
@@ -46,12 +46,12 @@ public class AIPlayer extends UnicastRemoteObject implements Player {
     }
 
     @Override
-    public void onWin() {
+    public void onWin() throws RemoteException {
         System.out.println("Computer wins. Hell yeah!");
     }
 
     @Override
-    public void onLose(Move move) {
+    public void onLose(Move move) throws RemoteException {
         System.out.println("Computer lost. What a shame!");
     }
 }

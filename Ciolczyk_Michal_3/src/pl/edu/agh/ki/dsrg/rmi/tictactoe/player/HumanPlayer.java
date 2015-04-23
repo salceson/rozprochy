@@ -49,8 +49,8 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
             do {
                 move = getNextMove();
             } while (!board.isMovePossible(move));
-            board.makeMove(this, move);
             fields[move.getField()] = symbol;
+            board.makeMove(this, move);
         }
     }
 
@@ -73,12 +73,12 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
         do {
             myMove = getNextMove();
         } while (!board.isMovePossible(myMove));
-        board.makeMove(this, myMove);
         fields[myMove.getField()] = symbol;
+        board.makeMove(this, myMove);
     }
 
     @Override
-    public void onWin() {
+    public void onWin() throws RemoteException {
         System.out.println("You won!");
         synchronized (synchronizer) {
             isFinished = true;
@@ -87,7 +87,7 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
     }
 
     @Override
-    public void onLose(Move move) {
+    public void onLose(Move move) throws RemoteException {
         printBoard();
         System.out.println("You lost!");
         synchronized (synchronizer) {
@@ -108,21 +108,21 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
             }
             System.out.println();
             for (int j = 0; j < FIELDS_ROW; j++) {
-                System.out.println(SEPARATOR_PLACEHOLDER);
+                System.out.print(SEPARATOR_PLACEHOLDER);
                 if (j != FIELDS_ROW - 1) {
                     System.out.print(SEPARATOR_H);
                 }
             }
             System.out.println();
             for (int j = 0; j < FIELDS_ROW; j++) {
-                System.out.println(fields[i * FIELDS_ROW + j]);
+                System.out.print(fields[i * FIELDS_ROW + j]);
                 if (j != FIELDS_ROW - 1) {
                     System.out.print(SEPARATOR_H);
                 }
             }
             System.out.println();
             for (int j = 0; j < FIELDS_ROW; j++) {
-                System.out.println(SEPARATOR_PLACEHOLDER);
+                System.out.print(SEPARATOR_PLACEHOLDER);
                 if (j != FIELDS_ROW - 1) {
                     System.out.print(SEPARATOR_H);
                 }

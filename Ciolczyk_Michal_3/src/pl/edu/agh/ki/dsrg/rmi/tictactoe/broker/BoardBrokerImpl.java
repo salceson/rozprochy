@@ -29,6 +29,8 @@ public class BoardBrokerImpl implements BoardBroker {
             throw new PlayerRejectedException();
         }
 
+        System.out.println(player.getNick() + " joined the server.");
+
         players.add(player.getNick());
 
         GameThread gameThread = null;
@@ -59,6 +61,8 @@ public class BoardBrokerImpl implements BoardBroker {
         }
 
         players.remove(player.getNick());
+
+        System.out.println(player.getNick() + " left the server.");
     }
 
     private static class GameThread extends Thread {

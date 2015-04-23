@@ -17,7 +17,7 @@ public interface Player extends Remote, Serializable {
 
     void onEnemyMove(Board board, Move move) throws RemoteException;
 
-    void onWin();
+    void onWin() throws RemoteException;
 
-    void onLose(Move move);
+    void onLose(Move move) throws RemoteException;
 }

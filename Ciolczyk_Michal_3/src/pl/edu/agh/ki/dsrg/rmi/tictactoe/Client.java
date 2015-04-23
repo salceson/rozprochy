@@ -37,13 +37,14 @@ public class Client {
         }
 
         try {
+            System.out.println("Connecting to server...");
             HumanPlayer player = new HumanPlayer(nick);
             BoardBroker boardBroker = (BoardBroker) Naming.lookup("rmi://" + host + ":" + port + "/broker");
-            System.out.println("Connecting to server...");
-            boardBroker.registerPlayer(player, enemyType);
             System.out.println("Connected. Please wait for your game...");
+            boardBroker.registerPlayer(player, enemyType);
             player.waitForFinish();
             boardBroker.unregisterPlayer(player);
+            System.exit(0);
         } catch (RemoteException | MalformedURLException | NotBoundException | InterruptedException e) {
             e.printStackTrace();
         }
