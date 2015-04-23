@@ -4,10 +4,10 @@ import pl.edu.agh.ki.dsrg.rmi.tictactoe.board.EnemyType;
 import pl.edu.agh.ki.dsrg.rmi.tictactoe.broker.BoardBroker;
 import pl.edu.agh.ki.dsrg.rmi.tictactoe.player.HumanPlayer;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
  * @author Michał Ciołczyk
@@ -39,14 +39,18 @@ public class Client {
         try {
             System.out.println("Connecting to server...");
             HumanPlayer player = new HumanPlayer(nick);
-            BoardBroker boardBroker = (BoardBroker) Naming.lookup("rmi://" + host + ":" + port + "/broker");
+            Registry registry = LocateRegistry.getRegistry(host, Integer.parseInt(port));
+            for (String name : registry.list()) {
+                System.out.println(name);
+            }
+            BoardBroker boardBroker = (BoardBroker) registry.lookup("broker");
             System.out.println("Connected. Please wait for your game...");
             boardBroker.registerPlayer(player, enemyType);
             player.waitForFinish();
             Thread.sleep(500);
             boardBroker.unregisterPlayer(player);
             System.exit(0);
-        } catch (RemoteException | MalformedURLException | NotBoundException | InterruptedException e) {
+        } catch (RemoteException | NotBoundException | InterruptedException e) {
             e.printStackTrace();
         }
     }
