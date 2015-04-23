@@ -44,11 +44,12 @@ public class Zad2Server extends Thread {
 
                 int readBytes = fis.read(buffer);
                 while (readBytes != -1) {
-                    out.write(buffer);
+                    out.write(buffer, 0, readBytes);
                     out.flush();
                     readBytes = fis.read(buffer);
                 }
 
+                fis.close();
                 socket.close();
             }
         } catch (IOException | InterruptedException e) {

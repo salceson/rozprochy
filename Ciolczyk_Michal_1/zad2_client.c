@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static const int BUFFER_SIZE = 255;
+static const int BUFFER_SIZE = 256;
 
 void usage();
 
@@ -46,14 +46,16 @@ int main(int argc, char **argv) {
 
     fd = open(argv[2], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IROTH | S_IRGRP);
 
+    bzero(buffer, BUFFER_SIZE * sizeof(char));
+    got = (int) recv(sck, buffer, BUFFER_SIZE * sizeof(char), 0);
+
     //Receiving file
-    do {
-        bzero(buffer, BUFFER_SIZE * sizeof(char));
-        got = (int) recv(sck, buffer, BUFFER_SIZE * sizeof(char), 0);
+    while (got != 0) {
         printf("Got %d bytes\n", got);
         write(fd, buffer, got * sizeof(char));
+        bzero(buffer, BUFFER_SIZE * sizeof(char));
+        got = (int) recv(sck, buffer, BUFFER_SIZE * sizeof(char), 0);
     }
-    while (got != 0);
 
     printf("File written\n");
 
