@@ -43,6 +43,7 @@ public class Client {
             System.out.println("Connected. Please wait for your game...");
             boardBroker.registerPlayer(player, enemyType);
             player.waitForFinish();
+            Thread.sleep(500);
             boardBroker.unregisterPlayer(player);
             System.exit(0);
         } catch (RemoteException | MalformedURLException | NotBoundException | InterruptedException e) {

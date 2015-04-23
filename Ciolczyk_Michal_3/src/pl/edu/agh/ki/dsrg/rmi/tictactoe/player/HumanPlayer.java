@@ -50,12 +50,14 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
                 move = getNextMove();
             } while (!board.isMovePossible(move));
             fields[move.getField()] = symbol;
+            printBoard();
             board.makeMove(this, move);
         }
     }
 
     private Move getNextMove() throws RemoteException {
         printBoard();
+        System.out.println("You're" + symbol);
         System.out.print("Enter your choice: ");
         try {
             int f = scanner.nextInt();
@@ -74,6 +76,7 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
             myMove = getNextMove();
         } while (!board.isMovePossible(myMove));
         fields[myMove.getField()] = symbol;
+        printBoard();
         board.makeMove(this, myMove);
     }
 

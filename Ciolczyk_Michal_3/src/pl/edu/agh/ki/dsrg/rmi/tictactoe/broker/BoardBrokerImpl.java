@@ -42,16 +42,20 @@ public class BoardBrokerImpl implements BoardBroker {
                 if (waitingPlayers.isEmpty()) {
                     waitingPlayers.add(player);
                 } else {
+                    //noinspection LoopStatementThatDoesntLoop
                     for (Player waitingPlayer : waitingPlayers) {
                         waitingPlayers.remove(waitingPlayer);
                         gameThread = new GameThread(player, waitingPlayer);
+                        break;
                     }
                 }
             }
         }
-        //noinspection ConstantConditions
-        gameThread.start();
-        gameThread.join();
+
+        if (gameThread != null) {
+            gameThread.start();
+            gameThread.join();
+        }
     }
 
     @Override

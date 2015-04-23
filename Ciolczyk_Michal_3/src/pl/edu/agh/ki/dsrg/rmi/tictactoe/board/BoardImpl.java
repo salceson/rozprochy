@@ -137,10 +137,10 @@ public class BoardImpl extends UnicastRemoteObject implements Board {
         }
 
         //TOP-RIGHT - BOTTOM-LEFT
-        player = fields[FIELDS_ROW];
+        player = fields[FIELDS_ROW - 1];
         finished = true;
         for (int i = 1; i < FIELDS_ROW; i++) {
-            if (!player.equals(fields[(i + 1) * FIELDS_ROW - i])) {
+            if (!player.equals(fields[(i + 1) * FIELDS_ROW - i - 1])) {
                 finished = false;
                 break;
             }
