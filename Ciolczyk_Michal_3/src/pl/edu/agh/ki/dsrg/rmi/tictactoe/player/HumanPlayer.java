@@ -110,7 +110,7 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
 
     @Override
     public void onDraw() throws RemoteException {
-        System.out.println("You lost!");
+        System.out.println("Draw!");
         synchronized (synchronizer) {
             isFinished = true;
             synchronizer.notifyAll();
