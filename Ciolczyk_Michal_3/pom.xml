@@ -1,8 +1,8 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>my-app</artifactId>
-  <version>1</version>
+  <groupId>pl.edu.agh.ki.dsrg.rmi</groupId>
+  <artifactId>tictactoe</artifactId>
+  <version>1.0</version>
 
   <build>
     <sourceDirectory>src/</sourceDirectory>

@@ -38,7 +38,7 @@ public class Client {
         }
 
         try {
-//            System.setProperty("java.rmi.server.hostname", visibleLocalhost);
+            System.setProperty("java.rmi.server.hostname", visibleLocalhost);
             System.out.println("Connecting to server...");
             HumanPlayer player = new HumanPlayer(nick);
             Registry registry = LocateRegistry.getRegistry(host, Integer.parseInt(port));
