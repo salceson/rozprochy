@@ -19,6 +19,7 @@ public class BoardImpl extends UnicastRemoteObject implements Board {
     private int currentPlayer;
     private boolean isGameFinished = false;
     private String[] fields = new String[FIELDS_NUM];
+    private int moves = 0;
 
     public BoardImpl(Player player1, Player player2, int firstPlayer) throws RemoteException {
         super();
@@ -54,6 +55,8 @@ public class BoardImpl extends UnicastRemoteObject implements Board {
             throw new MoveRejectedException();
         }
 
+        moves++;
+
         fields[move.getField()] = player.getNick();
 
         if (isFinished()) {
@@ -65,6 +68,26 @@ public class BoardImpl extends UnicastRemoteObject implements Board {
                 case 1:
                     player2.onWin();
                     player1.onLose(move);
+                    break;
+            }
+
+            synchronized (synchronizer) {
+                isGameFinished = true;
+                synchronizer.notifyAll();
+            }
+
+            return;
+        }
+
+        if (moves == FIELDS_NUM) {
+            switch (currentPlayer) {
+                case 0:
+                    player2.onDrawWithMove(move);
+                    player1.onDraw();
+                    break;
+                case 1:
+                    player1.onDrawWithMove(move);
+                    player2.onDraw();
                     break;
             }
 

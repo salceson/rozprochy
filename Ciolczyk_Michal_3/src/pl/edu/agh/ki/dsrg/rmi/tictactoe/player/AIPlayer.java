@@ -54,4 +54,14 @@ public class AIPlayer extends UnicastRemoteObject implements Player {
     public void onLose(Move move) throws RemoteException {
         System.out.println("Computer lost. What a shame!");
     }
+
+    @Override
+    public void onDrawWithMove(Move move) throws RemoteException {
+        onDraw();
+    }
+
+    @Override
+    public void onDraw() throws RemoteException {
+        System.out.println("Draw! Not so bad!");
+    }
 }

@@ -101,6 +101,22 @@ public class HumanPlayer extends UnicastRemoteObject implements Player {
         }
     }
 
+    @Override
+    public void onDrawWithMove(Move move) throws RemoteException {
+        fields[move.getField()] = enemySymbol;
+        printBoard();
+        onDraw();
+    }
+
+    @Override
+    public void onDraw() throws RemoteException {
+        System.out.println("You lost!");
+        synchronized (synchronizer) {
+            isFinished = true;
+            synchronizer.notifyAll();
+        }
+    }
+
     private void printBoard() {
         for (int i = 0; i < FIELDS_ROW; i++) {
             if (i != 0) {

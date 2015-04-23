@@ -84,11 +84,14 @@ public class BoardBrokerImpl implements BoardBroker {
             try {
                 String player1Nick = player1.getNick();
                 String player2Nick = player2.getNick();
+
                 System.out.println("Starting game between:");
                 System.out.println("\t0: " + player1Nick);
                 System.out.println("\t1: " + player2Nick);
                 System.out.println("\tPlayer " + firstPlayer + " starts!");
+
                 BoardImpl board = new BoardImpl(player1, player2, firstPlayer);
+
                 switch (firstPlayer) {
                     case 0:
                         player2.onGameStarted(board, false);
@@ -99,7 +102,9 @@ public class BoardBrokerImpl implements BoardBroker {
                         player2.onGameStarted(board, true);
                         break;
                 }
+
                 board.waitForFinish();
+
                 System.out.println("Game between:");
                 System.out.println("\t0: " + player1Nick);
                 System.out.println("\t1: " + player2Nick);

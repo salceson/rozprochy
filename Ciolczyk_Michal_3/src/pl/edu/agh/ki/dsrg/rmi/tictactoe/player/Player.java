@@ -21,5 +21,7 @@ public interface Player extends Remote, Serializable {
 
     void onLose(Move move) throws RemoteException;
 
-//    void onDraw(Move move) throws RemoteException;
+    void onDrawWithMove(Move move) throws RemoteException;
+
+    void onDraw() throws RemoteException;
 }
