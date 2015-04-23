@@ -25,7 +25,7 @@ public class Server {
         String port = args[1];
         try {
             String hostname = InetAddress.getLocalHost().getHostAddress();
-            System.out.println("this host IP is " + hostname);
+            System.out.println("This host IP is " + hostname);
             System.setProperty("java.rmi.server.hostname", hostname);
         } catch (UnknownHostException e) {
             e.printStackTrace();
