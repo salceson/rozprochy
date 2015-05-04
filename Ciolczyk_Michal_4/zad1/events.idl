@@ -1,5 +1,7 @@
+//Author: Michał Ciołczyk
+
 module users {
-	struct User;
+	interface User;
 };
 
 module exceptions {
@@ -44,7 +46,6 @@ module date {
 
 module events {
 	struct EventData {
-		sequence<users::User> participants;
 		date::DateTime startDate;
 		date::DateTime endDate;
 		string name;
@@ -53,24 +54,29 @@ module events {
 		short maxParticipants;
 	};
 
+	typedef sequence<users::User> usersSeq;
+
 	interface Event {
 		attribute EventData eventData;
+		usersSeq getParticipants();
 		boolean canJoin();
 	};
 
 	module listeners {
 		interface EventListener {
-			void notifyUser(in Event event);
+			void notifyUser(in EventData eventData, in string message);
 		};
 	};
 };
 
 module users {
-	struct User {
-		string username;
-		string password;
-		sequence<events::Event> events;
-		events::listeners::EventListener eventListener;
+	typedef sequence<events::Event> eventsSeq;
+
+	interface User {
+		attribute string username;
+		attribute string password;
+		attribute events::listeners::EventListener eventListener;
+		eventsSeq getEvents();
 	};
 
 	interface UserManager {
