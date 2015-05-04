@@ -18,7 +18,9 @@ Zadanie: Chat Multicastowy
 
 Zadanie: Gra w kółko i krzyżyk
 
-## Laboratorium 4 - CORBA/ICE - IDL/SLICE
+## Laboratorium 4 - CORBA/ICE - wstęp, IDL/SLICE
 
-Zadanie: IDL/SLICE dla systemu zarządzania wydarzeniami.
+Zadania:
+* Zad0 - Przykłady z laboratoriów
+* Zad1 - IDL/SLICE dla systemu zarządzania wydarzeniami.
 
