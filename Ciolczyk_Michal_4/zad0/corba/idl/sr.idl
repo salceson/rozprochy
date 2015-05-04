@@ -1,0 +1,60 @@
+module example1
+{
+	struct S1
+	{
+		long a;
+		char b;
+	};
+	
+	interface I2
+	{
+		long op();
+	};
+
+	interface I2Ext : I2
+	{
+		long opExt();
+	};
+	
+    interface I1
+    {
+    	short op1(in long abc);
+        string op2( in string text, inout string text2, out string text3, in S1 struct1);
+        long op3(in short a);
+        I2 getI2();
+    };
+};
+
+
+module example2 
+{
+	
+	interface Item;
+	
+	exception ItemNotExists {};
+	exception ItemAlreadyExists {};
+	exception ItemBusy {};
+
+    interface AFactory { 
+      Item create_item(in string name, in string type) raises (ItemAlreadyExists);
+      Item take_item(in string name) raises (ItemNotExists, ItemBusy);
+      void release_item(in string name) raises (ItemNotExists);
+    };
+
+    interface Item {
+      readonly attribute string name;
+      long get_item_age();
+    };  
+
+    interface ItemA : Item {
+    	void actionA(in float a, out long b); 
+    };  
+
+    interface ItemB : Item {
+    	float actionB(in string a); 
+    };  
+    interface ItemC : Item {
+    	void actionC(inout long a, out short b); 
+    };  
+
+};
