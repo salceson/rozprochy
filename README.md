@@ -17,3 +17,8 @@ Zadanie: Chat Multicastowy
 ## Laboratorium 3 - RMI
 
 Zadanie: Gra w kółko i krzyżyk
+
+## Laboratorium 4 - IDL/SLICE
+
+Zadanie: IDL/SLICE dla systemu zarządzania wydarzeniami.
+

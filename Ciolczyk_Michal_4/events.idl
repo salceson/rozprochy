@@ -1,0 +1,113 @@
+module users {
+	struct User;
+};
+
+module exceptions {
+	exception DataUserPasswordAuthenticationException {
+		string message;
+	};
+
+	exception UserAlreadyExistsException {
+		string message;
+	};
+
+	exception NoSuchUserException {
+		string message;
+	};
+
+	exception EndDateBeforeStartDateException {
+		string message;
+	};
+
+	exception NoSuchEventException {
+		string message;
+	};
+
+	exception SubscribeException {
+		string message;
+	};
+
+	exception UnsubscribeException {
+		string message;
+	};
+};
+
+module date {
+	struct DateTime {
+		short year;
+		short month;
+		short day;
+		short hour;
+		short minute;
+	};
+};
+
+module events {
+	struct EventData {
+		sequence<users::User> participants;
+		date::DateTime startDate;
+		date::DateTime endDate;
+		string name;
+		string place;
+		short minParticipants;
+		short maxParticipants;
+	};
+
+	interface Event {
+		attribute EventData eventData;
+		boolean canJoin();
+	};
+
+	module listeners {
+		interface EventListener {
+			void notifyUser(in Event event);
+		};
+	};
+};
+
+module users {
+	struct User {
+		string username;
+		string password;
+		sequence<events::Event> events;
+		events::listeners::EventListener eventListener;
+	};
+
+	interface UserManager {
+		User login(in string username, in string password) raises (exceptions::DataUserPasswordAuthenticationException);
+		void register(in string username, in string password) raises (exceptions::UserAlreadyExistsException);
+	};
+};
+
+module events {
+	interface EventManager {
+		typedef sequence<Event> eventsSeq;
+
+		Event create(in EventData eventData) raises (exceptions::EndDateBeforeStartDateException);
+		
+		eventsSeq findEventsByName(in string name);
+		eventsSeq findEventsByPlace(in string place);
+		eventsSeq findEventsByParticipantName(in string participantName);
+		
+		eventsSeq list();
+
+		void subscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::SubscribeException);
+		void unsubscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::UnsubscribeException);
+	};
+
+	module classevents {
+		struct Teacher {
+			string firstName;
+			string lastName;
+			string title;
+			short age;
+		};
+
+		interface ClassEvent : events::Event {
+ 			attribute Teacher teacher;
+ 			attribute string subject;
+			attribute short semester;
+ 		};
+	};
+};
+		
