@@ -85,6 +85,7 @@ module users {
 		attribute string password;
 		attribute events::listeners::EventListener eventListener;
 		eventsSeq getEvents();
+		void addEvent(in events::Event event);
 	};
 
 	interface UserManager {
@@ -102,6 +103,7 @@ module events {
 		eventsSeq findEventsByName(in string name);
 		eventsSeq findEventsByPlace(in string place);
 		eventsSeq findEventsByParticipantName(in string participantName);
+		eventsSeq findEventsByDate(in date::DateTime date);
 		
 		eventsSeq list();
 
