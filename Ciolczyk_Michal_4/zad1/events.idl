@@ -89,8 +89,8 @@ module users {
 	};
 
 	interface UserManager {
-		User login(in string username, in string password) raises (exceptions::DataUserPasswordAuthenticationException);
-		void register(in string username, in string password) raises (exceptions::UserAlreadyExistsException);
+		void login(in string username, in string password) raises (exceptions::DataUserPasswordAuthenticationException);
+		User register(in string username, in string password) raises (exceptions::UserAlreadyExistsException);
 	};
 };
 
