@@ -25,6 +25,14 @@ module exceptions {
 		string message;
 	};
 
+	exception JoinException {
+		string message;
+	};
+
+	exception LeaveException {
+		string message;
+	};
+
 	exception SubscribeException {
 		string message;
 	};
@@ -96,6 +104,9 @@ module events {
 		eventsSeq findEventsByParticipantName(in string participantName);
 		
 		eventsSeq list();
+
+		void join(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::JoinException);
+		void leave(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::LeaveException);
 
 		void subscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::SubscribeException);
 		void unsubscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::UnsubscribeException);
