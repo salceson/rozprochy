@@ -21,10 +21,6 @@ module exceptions {
 		string message;
 	};
 
-	exception NoSuchEventException {
-		string message;
-	};
-
 	exception JoinException {
 		string message;
 	};
@@ -68,6 +64,11 @@ module events {
 		attribute EventData eventData;
 		usersSeq getParticipants();
 		boolean canJoin();
+		void join(in users::User user) raises (exceptions::NoSuchUserException, exceptions::JoinException);
+		void leave(in users::User user) raises (exceptions::NoSuchUserException, exceptions::LeaveException);
+
+		void subscribe(in users::User user) raises (exceptions::NoSuchUserException, exceptions::SubscribeException);
+		void unsubscribe(in users::User user) raises (exceptions::NoSuchUserException, exceptions::UnsubscribeException);
 	};
 
 	module listeners {
@@ -95,25 +96,6 @@ module users {
 };
 
 module events {
-	interface EventManager {
-		typedef sequence<Event> eventsSeq;
-
-		Event create(in EventData eventData) raises (exceptions::EndDateBeforeStartDateException);
-		
-		eventsSeq findEventsByName(in string name);
-		eventsSeq findEventsByPlace(in string place);
-		eventsSeq findEventsByParticipantName(in string participantName);
-		eventsSeq findEventsByDate(in date::DateTime date);
-		
-		eventsSeq list();
-
-		void join(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::JoinException);
-		void leave(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::LeaveException);
-
-		void subscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::SubscribeException);
-		void unsubscribe(in Event event, in users::User user) raises (exceptions::NoSuchEventException, exceptions::NoSuchUserException, exceptions::UnsubscribeException);
-	};
-
 	module classevents {
 		struct Teacher {
 			string firstName;
@@ -127,6 +109,20 @@ module events {
  			attribute string subject;
 			attribute short semester;
  		};
+	};
+
+	interface EventManager {
+		typedef sequence<Event> eventsSeq;
+
+		Event createEvent(in EventData eventData) raises (exceptions::EndDateBeforeStartDateException);
+		Event createClassEvent(in EventData eventData, in events::classevents::Teacher teacher, in string subject, in short semester) raises (exceptions::EndDateBeforeStartDateException);
+		
+		eventsSeq findEventsByName(in string name);
+		eventsSeq findEventsByPlace(in string place);
+		eventsSeq findEventsByParticipantName(in string participantName);
+		eventsSeq findEventsByDate(in date::DateTime date);
+		
+		eventsSeq list();
 	};
 };
 		
