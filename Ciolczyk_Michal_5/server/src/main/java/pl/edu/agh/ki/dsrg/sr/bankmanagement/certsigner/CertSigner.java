@@ -18,7 +18,7 @@ import static Ice.Util.initialize;
  */
 public class CertSigner {
     public static void main(String[] args) {
-        Communicator communicator = null;
+        Communicator communicator;
         try (FileInputStream fis = new FileInputStream("c.csr"); FileOutputStream fos = new FileOutputStream("c.crt")) {
             communicator = initialize(args);
             ObjectPrx certSignerProxy = communicator.propertyToProxy("CertSigner");
