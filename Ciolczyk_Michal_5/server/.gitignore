@@ -78,3 +78,9 @@ buildNumber.properties
 ### Slice
 
 generated/
+
+### Certificates
+*.csr
+*.jks
+*.crt
+!sr2015ca.crt
