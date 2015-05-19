@@ -9,9 +9,16 @@ import Ice.Current;
  * @author Michał Ciołczyk
  */
 public class AccountImpl extends _AccountDisp {
+    private int balance;
+
+    public AccountImpl(int balance) {
+        super();
+        this.balance = balance;
+    }
+
     @Override
     public int getBalance(Current __current) {
-        return 0;
+        return balance;
     }
 
     @Override

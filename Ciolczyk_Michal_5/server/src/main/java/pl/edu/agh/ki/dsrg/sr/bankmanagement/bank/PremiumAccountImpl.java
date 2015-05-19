@@ -11,6 +11,11 @@ import Ice.IntHolder;
 public class PremiumAccountImpl extends _PremiumAccountDisp {
     AccountImpl account;
 
+    public PremiumAccountImpl(int balance) {
+        super();
+        account = new AccountImpl(balance);
+    }
+
     @Override
     public void calculateLoan(int amount, Currency curr, int period, FloatHolder interestRate, IntHolder totalCost, Current __current) throws IncorrectData {
 
