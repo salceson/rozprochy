@@ -10,6 +10,7 @@ object Client extends App {
     println("\tc: create new account")
     println("\tr: remove account")
     println("\ts: silver account operations")
+    println("\tp: premium account operations")
     println("\tx: exit")
     print("Enter option: ")
   }
@@ -80,6 +81,9 @@ object Client extends App {
           deleteAccount(scanner, bankManagerProxy)
         case "s" =>
           val sap = new SilverAccountOperations(communicator, scanner)
+          sap.accountMenu()
+        case "p" =>
+          val sap = new PremiumAccountOperations(communicator, scanner)
           sap.accountMenu()
         case "x" =>
           communicator.shutdown()
