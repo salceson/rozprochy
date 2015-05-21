@@ -56,7 +56,7 @@ object Client extends App {
     println("Removing account:")
     print("\tEnter account number: ")
     val accountNumber = scanner.nextLine()
-    try{
+    try {
       bankManagerProxy.removeAccount(accountNumber)
       println("\tAccount removed!")
     } catch {

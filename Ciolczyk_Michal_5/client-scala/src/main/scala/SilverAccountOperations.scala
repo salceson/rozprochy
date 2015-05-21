@@ -36,7 +36,7 @@ class SilverAccountOperations(val communicator: Communicator, val scanner: Scann
     try {
       val objProxy = communicator.stringToProxy(objectName)
       accountProxy = AccountPrxHelper.checkedCast(objProxy)
-      if(accountProxy == null) {
+      if (accountProxy == null) {
         throw new NoSuchAccount()
       }
     } catch {
