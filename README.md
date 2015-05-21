@@ -24,3 +24,7 @@ Zadania:
 * Zad0 - Przykłady z laboratoriów
 * Zad1 - IDL/SLICE dla systemu zarządzania wydarzeniami.
 
+## Laboratorium 5 - ICE - zaawansowane zagadnienia
+
+Zadanie: Aplikacja bankowa
+
