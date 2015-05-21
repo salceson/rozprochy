@@ -24,6 +24,9 @@ public class Main {
         communicator = initialize(args);
         LOGGER.info("Communicator initialized");
 
+
+        LOGGER.info("Creating object adapter");
+
         ObjectAdapter objectAdapter = communicator.createObjectAdapter("BankManager");
 
         int evictorLimit = communicator.getProperties().getPropertyAsIntWithDefault("Evictor.Limit", 2);
