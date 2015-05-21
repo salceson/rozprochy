@@ -8,6 +8,6 @@ add_executable(client ${SOURCE_FILES})
 add_custom_target(
     sliceCompile
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/slice/compileIce.sh
-    WORKING_DIR ${CMAKE_CURRENT_SOURCE_DIR}/slice
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/slice
 )
 add_dependencies(client sliceCompile)
