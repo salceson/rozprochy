@@ -1,7 +1,6 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement.domain;
 
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.financialnews.FinancialData;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.financialnews.FinancialDataRepository;
@@ -9,7 +8,6 @@ import pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.financialnews.FinancialDataRepos
 /**
  * @author Michał Ciołczyk
  */
-@RequiredArgsConstructor(staticName = "create")
 @EqualsAndHashCode(of = "accountNumber")
 @ToString
 public class PremiumAccount implements Account {
@@ -17,7 +15,17 @@ public class PremiumAccount implements Account {
 
     private final String accountNumber;
 
-    private int balance = 500;
+    private int balance;
+
+    private PremiumAccount(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public static PremiumAccount create(String accountNumber) {
+        PremiumAccount account = new PremiumAccount(accountNumber);
+        account.balance = 500;
+        return account;
+    }
 
     @Override
     public String getAccountNumber() {

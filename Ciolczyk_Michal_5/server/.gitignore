@@ -84,3 +84,6 @@ generated/
 *.jks
 *.crt
 !sr2015ca.crt
+
+### Evicted servants data
+data/

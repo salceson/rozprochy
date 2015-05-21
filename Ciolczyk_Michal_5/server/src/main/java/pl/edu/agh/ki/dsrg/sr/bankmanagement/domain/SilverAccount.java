@@ -1,18 +1,26 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement.domain;
 
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
  * @author Michał Ciołczyk
  */
-@RequiredArgsConstructor(staticName = "create")
 @ToString
 @EqualsAndHashCode(of = "accountNumber")
 public class SilverAccount implements Account {
     private final String accountNumber;
-    private int balance = 100;
+    private int balance;
+
+    private SilverAccount(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public static SilverAccount create(String accountNumber) {
+        SilverAccount account = new SilverAccount(accountNumber);
+        account.balance = 100;
+        return account;
+    }
 
     @Override
     public String getAccountNumber() {

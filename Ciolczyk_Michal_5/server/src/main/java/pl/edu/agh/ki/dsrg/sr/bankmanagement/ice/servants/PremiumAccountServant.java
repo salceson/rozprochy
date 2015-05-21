@@ -24,6 +24,14 @@ public class PremiumAccountServant extends _PremiumAccountDisp {
     @Override
     public void calculateLoan(int amount, Currency currency, int period, FloatHolder interestRateHolder,
                               IntHolder totalCostHolder, Current __current) throws IncorrectData {
+        if (amount < 0) {
+            throw new IncorrectData("amount < 0");
+        }
+
+        if (period <= 0) {
+            throw new IncorrectData("period < 0");
+        }
+
         float interestRate = financialData.getInterestRate(
                 CurrencyPackageConverter.convertBankCurrencyToFinancialCurrency(currency)
         );
