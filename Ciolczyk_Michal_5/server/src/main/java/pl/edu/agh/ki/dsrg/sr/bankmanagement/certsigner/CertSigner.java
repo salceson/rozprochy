@@ -18,7 +18,7 @@ import static Ice.Util.initialize;
  */
 public class CertSigner {
     public static void main(String[] args) {
-        if(args.length < 3) {
+        if (args.length < 3) {
             System.err.println("Usage: java CertSigner [ice config] [cert input file] [cert output file]");
             System.exit(666);
         }

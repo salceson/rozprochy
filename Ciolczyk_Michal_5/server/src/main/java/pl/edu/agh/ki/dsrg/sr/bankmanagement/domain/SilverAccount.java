@@ -12,8 +12,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "accountNumber")
 public class SilverAccount implements Account {
     private final String accountNumber;
-    private int balance = 0;
-    private int loan = 0;
+    private int balance = 100;
 
     @Override
     public String getAccountNumber() {
@@ -41,6 +40,9 @@ public class SilverAccount implements Account {
     @Override
     public MoneyTransferBuilder transfer(final int amount) {
         return toAccountNumber -> {
+            if (amount <= 0) {
+                throw new IllegalStateException("Amount <= 0!");
+            }
             final AccountRepository accountRepository = AccountRepository.getInstance();
             Account toAccount = accountRepository.get(toAccountNumber).orElseThrow(NoSuchAccountException::new);
             decrease(amount);

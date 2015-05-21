@@ -17,7 +17,7 @@ public class PremiumAccount implements Account {
 
     private final String accountNumber;
 
-    private int balance = 0;
+    private int balance = 500;
 
     @Override
     public String getAccountNumber() {
@@ -44,6 +44,9 @@ public class PremiumAccount implements Account {
     @Override
     public MoneyTransferBuilder transfer(int amount) {
         return toAccountNumber -> {
+            if (amount <= 0) {
+                throw new IllegalStateException("Amount <= 0!");
+            }
             final AccountRepository accountRepository = AccountRepository.getInstance();
             Account toAccount = accountRepository.get(toAccountNumber).orElseThrow(NoSuchAccountException::new);
             decrease(amount);
