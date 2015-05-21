@@ -1,7 +1,7 @@
 import java.util.Scanner
 
 import Bank._
-import Ice.{IllegalIdentityException, Communicator}
+import Ice.{Communicator, IllegalIdentityException}
 
 class SilverAccountOperations(val communicator: Communicator, val scanner: Scanner) {
   private val ACCOUNT_CATEGORY = "acc"
@@ -18,9 +18,12 @@ class SilverAccountOperations(val communicator: Communicator, val scanner: Scann
       println("\t\tanything else: return")
       print("\tEnter choice: ")
       scanner.nextLine() match {
-        case "b" => accountBalance()
-        case "n" => accountNumber()
-        case _ => println()
+        case "b" =>
+          accountBalance()
+        case "n" =>
+          accountNumber()
+        case _ =>
+          println()
       }
     } catch {
       case e: NoSuchAccount =>
