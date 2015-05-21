@@ -2,6 +2,8 @@ package pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.security;
 
 import IceSSL.CertificateVerifier;
 import IceSSL.NativeConnectionInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.Principal;
 import java.security.cert.Certificate;
@@ -11,6 +13,9 @@ import java.security.cert.X509Certificate;
  * @author Michał Ciołczyk
  */
 public class SimpleCertificateVerifier implements CertificateVerifier {
+    private final Logger LOGGER = LoggerFactory.getLogger(SimpleCertificateVerifier.class);
+    public static final String CERTIFICATE_FORMAT = "Certificate:\n\tIssuer: %s\n\tSubject: %s\n";
+
     @Override
     public boolean verify(NativeConnectionInfo nativeConnectionInfo) {
         if (nativeConnectionInfo.nativeCerts.length < 1) {
@@ -31,10 +36,7 @@ public class SimpleCertificateVerifier implements CertificateVerifier {
         Principal issuerDN = x509Certificate.getIssuerDN();
         Principal subjectDN = x509Certificate.getSubjectDN();
 
-        System.out.println("Certificate:");
-        System.out.println("\t" + issuerDN.getName());
-        System.out.println("\t" + subjectDN.getName());
-        System.out.println();
+        LOGGER.info(String.format(CERTIFICATE_FORMAT, issuerDN.getName(), subjectDN.getName()));
 
         return issuerDN.getName().contains("CN=Laboratorium Systemów Rozproszonych");
     }

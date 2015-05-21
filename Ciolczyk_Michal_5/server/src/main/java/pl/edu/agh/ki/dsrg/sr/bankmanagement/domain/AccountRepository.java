@@ -97,6 +97,18 @@ public class AccountRepository {
         return Collections.unmodifiableSet(registeredAccounts.keySet());
     }
 
+    public boolean contains(@NonNull String accountNumber) {
+        return registeredAccounts.containsKey(accountNumber);
+    }
+
+    public void unregister(@NonNull String accountNumber) throws NoSuchAccountException {
+        if (!contains(accountNumber)) {
+            throw new NoSuchAccountException();
+        }
+
+        registeredAccounts.remove(accountNumber);
+    }
+
     /**
      * This class is not intended to normal use. It's only purpose is be a receiver of transfer!
      */
