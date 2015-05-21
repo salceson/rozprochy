@@ -1,10 +1,7 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement;
 
 import FinancialNews.*;
-import Ice.Communicator;
-import Ice.ObjectAdapter;
-import Ice.ObjectPrx;
-import Ice.ServantLocator;
+import Ice.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.domain.BankManager;
@@ -39,7 +36,7 @@ public class Main {
         BankManager bankManager = new BankManager();
         Bank.BankManager bankManagerServant = new BankManagerServant(bankManager);
 
-        objectAdapter.addDefaultServant(bankManagerServant, "common");
+        objectAdapter.add(bankManagerServant, new Identity("BankManager", ""));
 
         objectAdapter.activate();
 
