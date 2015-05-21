@@ -5,8 +5,6 @@ import Ice.StringHolder
 import Ice.Util.initialize
 
 object Client extends App {
-  var bankManagerProxy: BankManagerPrx = null
-
   def printMenu(): Unit = {
     println("Menu:")
     println("\tc: create new account")
@@ -15,7 +13,7 @@ object Client extends App {
     print("Enter option: ")
   }
 
-  def createAccount(scanner: Scanner): Unit = {
+  def createAccount(scanner: Scanner, bankManagerProxy: BankManagerPrx): Unit = {
     println("Creating new account:")
     print("\tEnter first name: ")
     val firstName = scanner.nextLine()
@@ -53,7 +51,7 @@ object Client extends App {
     }
   }
 
-  def deleteAccount(scanner: Scanner): Unit = {
+  def deleteAccount(scanner: Scanner, bankManagerProxy: BankManagerPrx): Unit = {
     println("Removing account:")
     print("\tEnter account number: ")
     val accountNumber = scanner.nextLine()
@@ -70,15 +68,15 @@ object Client extends App {
     val scanner = new Scanner(System.in)
     val communicator = initialize(args)
     val proxy = communicator.propertyToProxy("BankManager")
-    bankManagerProxy = BankManagerPrxHelper.checkedCast(proxy)
+    val bankManagerProxy = BankManagerPrxHelper.checkedCast(proxy)
     while (true) {
       printMenu()
       val input = scanner.nextLine()
       input.trim match {
         case "c" =>
-          createAccount(scanner)
+          createAccount(scanner, bankManagerProxy)
         case "r" =>
-          deleteAccount(scanner)
+          deleteAccount(scanner, bankManagerProxy)
         case "x" =>
           communicator.shutdown()
           System.exit(0)
