@@ -18,8 +18,12 @@ import static Ice.Util.initialize;
  */
 public class CertSigner {
     public static void main(String[] args) {
+        if(args.length < 3) {
+            System.err.println("Usage: java CertSigner [ice config] [cert input file] [cert output file]");
+            System.exit(666);
+        }
         Communicator communicator;
-        try (FileInputStream fis = new FileInputStream("c.csr"); FileOutputStream fos = new FileOutputStream("c.crt")) {
+        try (FileInputStream fis = new FileInputStream(args[1]); FileOutputStream fos = new FileOutputStream(args[2])) {
             communicator = initialize(args);
             ObjectPrx certSignerProxy = communicator.propertyToProxy("CertSigner");
             CertSignerPrx certSigner = CertSignerPrxHelper.checkedCast(certSignerProxy);

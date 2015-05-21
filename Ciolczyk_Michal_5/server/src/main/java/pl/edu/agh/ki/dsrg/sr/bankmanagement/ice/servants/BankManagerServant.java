@@ -28,8 +28,8 @@ public class BankManagerServant extends _BankManagerDisp {
     private final PersonalDataVerifier verifier = PersonalDataVerifierImpl.getInstance();
 
     @Override
-    public void createAccount(PersonalData data, accountType type, StringHolder accountID, Current current) throws
-            IncorrectData, RequestRejected {
+    public void createAccount(PersonalData data, accountType type, StringHolder accountID, Current current)
+            throws IncorrectData, RequestRejected {
         if (!isPersonalDataValid(data)) {
             throw new IncorrectData();
         }

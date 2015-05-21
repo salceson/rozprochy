@@ -9,6 +9,7 @@ object Client extends App {
     println("Menu:")
     println("\tc: create new account")
     println("\tr: remove account")
+    println("\ts: silver account operations")
     println("\tx: exit")
     print("Enter option: ")
   }
@@ -77,6 +78,9 @@ object Client extends App {
           createAccount(scanner, bankManagerProxy)
         case "r" =>
           deleteAccount(scanner, bankManagerProxy)
+        case "s" =>
+          val sap = new SilverAccountOperations(communicator, scanner)
+          sap.accountMenu()
         case "x" =>
           communicator.shutdown()
           System.exit(0)
