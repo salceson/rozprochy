@@ -14,11 +14,11 @@ public class BankManager {
         return accountNumber;
     }
 
-    public boolean contains(String accountNumber) {
-        return accountRepository.contains(accountNumber);
-    }
-
     public void removeAccount(String accountNumber) throws NoSuchAccountException {
         accountRepository.unregister(accountNumber);
+    }
+
+    public Account.Type getAccountType(String accountID) throws NoSuchAccountException {
+        return accountRepository.getAccountType(accountID);
     }
 }

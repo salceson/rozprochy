@@ -1,4 +1,4 @@
-package pl.edu.agh.ki.dsrg.sr.bankmanagement.financialnews;
+package pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.financialnews;
 
 import FinancialNews.Currency;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.util.Pair;

@@ -1,6 +1,5 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement.domain;
 
-import Bank.Currency;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -37,11 +36,6 @@ public class SilverAccount implements Account {
     @Override
     public synchronized int getBalance() {
         return balance;
-    }
-
-    @Override
-    public void takeLoan(int amount, Currency currency, int period) {
-        throw new UnsupportedOperationException();
     }
 
     @Override

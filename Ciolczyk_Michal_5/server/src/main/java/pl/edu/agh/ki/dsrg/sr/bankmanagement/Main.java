@@ -15,7 +15,7 @@ import static Ice.Util.initialize;
  * @author Michał Ciołczyk
  */
 public class Main {
-    private static final String ACCOUNT_CATEGORY = "acc";
+    public static final String ACCOUNT_CATEGORY = "acc";
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {

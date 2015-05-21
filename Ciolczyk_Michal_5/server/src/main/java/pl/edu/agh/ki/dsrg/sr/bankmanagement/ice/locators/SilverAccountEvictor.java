@@ -83,6 +83,7 @@ public class SilverAccountEvictor implements ServantLocator {
     }
 
     private Optional<Account> loadAccount(String accountNumber) {
+        LOGGER.info("Loading: " + accountNumber);
         return accountRepository.loadToMemory(accountNumber);
     }
 }

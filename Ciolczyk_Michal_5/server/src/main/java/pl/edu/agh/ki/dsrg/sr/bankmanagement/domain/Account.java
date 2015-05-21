@@ -1,7 +1,5 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement.domain;
 
-import Bank.Currency;
-
 /**
  * @author Michał Ciołczyk
  */
@@ -13,8 +11,6 @@ public interface Account {
     void decrease(int amount) throws IllegalStateException;
 
     int getBalance();
-
-    void takeLoan(int amount, Currency currency, int period);
 
     MoneyTransferBuilder transfer(int amount);
 

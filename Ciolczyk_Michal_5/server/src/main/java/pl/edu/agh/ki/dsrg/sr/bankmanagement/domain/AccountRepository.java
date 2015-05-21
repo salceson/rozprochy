@@ -1,6 +1,5 @@
 package pl.edu.agh.ki.dsrg.sr.bankmanagement.domain;
 
-import Bank.Currency;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import lombok.NonNull;
@@ -11,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Scanner;
 
 /**
  * @author Michał Ciołczyk
@@ -93,10 +94,6 @@ public class AccountRepository {
         registeredAccounts.put(accountNumber, type);
     }
 
-    public Set<String> getRegisteredAccounts() {
-        return Collections.unmodifiableSet(registeredAccounts.keySet());
-    }
-
     public boolean contains(@NonNull String accountNumber) {
         return registeredAccounts.containsKey(accountNumber);
     }
@@ -107,6 +104,13 @@ public class AccountRepository {
         }
 
         registeredAccounts.remove(accountNumber);
+    }
+
+    public Account.Type getAccountType(String accountID) throws NoSuchAccountException {
+        if (!contains(accountID)) {
+            throw new NoSuchAccountException();
+        }
+        return registeredAccounts.get(accountID);
     }
 
     /**
@@ -151,11 +155,6 @@ public class AccountRepository {
             account.decrease(amount);
             used = true;
             saveToFile();
-        }
-
-        @Override
-        public void takeLoan(int amount, Currency curr, int period) {
-            throw new UnsupportedOperationException();
         }
 
         private void saveToFile() {
