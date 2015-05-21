@@ -18,6 +18,7 @@ public interface Account {
 
     MoneyTransferBuilder transfer(int amount);
 
+    @SuppressWarnings("unused")
     enum Type {
         SILVER {
             @Override

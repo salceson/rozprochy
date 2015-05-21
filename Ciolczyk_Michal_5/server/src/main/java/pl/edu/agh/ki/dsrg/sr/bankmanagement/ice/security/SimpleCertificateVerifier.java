@@ -14,7 +14,7 @@ import java.security.cert.X509Certificate;
  */
 public class SimpleCertificateVerifier implements CertificateVerifier {
     private final Logger LOGGER = LoggerFactory.getLogger(SimpleCertificateVerifier.class);
-    public static final String CERTIFICATE_FORMAT = "Certificate:\n\tIssuer: %s\n\tSubject: %s\n";
+    private static final String CERTIFICATE_FORMAT = "Certificate:\n\tIssuer: %s\n\tSubject: %s\n";
 
     @Override
     public boolean verify(NativeConnectionInfo nativeConnectionInfo) {

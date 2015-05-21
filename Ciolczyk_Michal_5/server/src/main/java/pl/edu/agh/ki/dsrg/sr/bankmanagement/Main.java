@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.domain.BankManager;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.locators.SilverAccountEvictor;
+import pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.servants.BankManagerServant;
 
 import static Ice.Util.initialize;
 
@@ -31,7 +32,14 @@ public class Main {
         LOGGER.info("Evictor added: " + silverAccountEvictor);
 
         BankManager bankManager = new BankManager();
+        Bank.BankManager bankManagerServant = new BankManagerServant(bankManager);
 
+        objectAdapter.addDefaultServant(bankManagerServant, "common");
+
+        objectAdapter.activate();
+
+        LOGGER.info("Activated object adapter");
+        LOGGER.info("Started server");
 
         communicator.waitForShutdown();
     }
