@@ -65,9 +65,6 @@ class PremiumAccountOperations(val communicator: Communicator, val scanner: Scan
       val toAccountNumber = scanner.nextLine()
       print("\tEnter amount in PLN: ")
       val amount = scanner.nextInt()
-      if (scanner.hasNext) {
-        scanner.nextLine()
-      }
       accountProxy.transferMoney(toAccountNumber, amount)
       println("\t" + amount + " PLN successfully transfered to account: " + toAccountNumber)
     } catch {
@@ -86,14 +83,8 @@ class PremiumAccountOperations(val communicator: Communicator, val scanner: Scan
       val currency = Currency.valueOf(scanner.nextLine())
       print("\tEnter amount: ")
       val amount = scanner.nextInt()
-      if (scanner.hasNext) {
-        scanner.nextLine()
-      }
       print("\tEnter period (in months): ")
       val period = scanner.nextInt()
-      if (scanner.hasNext) {
-        scanner.nextLine()
-      }
       val interestRateHolder = new FloatHolder()
       val totalCostHolder = new IntHolder()
       accountProxy.calculateLoan(amount, currency, period, interestRateHolder, totalCostHolder)

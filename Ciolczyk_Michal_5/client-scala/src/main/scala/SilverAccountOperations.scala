@@ -62,9 +62,6 @@ class SilverAccountOperations(val communicator: Communicator, val scanner: Scann
       val toAccountNumber = scanner.nextLine()
       print("\tEnter amount in PLN: ")
       val amount = scanner.nextInt()
-      if (scanner.hasNext) {
-        scanner.nextLine()
-      }
       accountProxy.transferMoney(toAccountNumber, amount)
       println("\t" + amount + " PLN successfully transfered to account: " + toAccountNumber)
     } catch {
