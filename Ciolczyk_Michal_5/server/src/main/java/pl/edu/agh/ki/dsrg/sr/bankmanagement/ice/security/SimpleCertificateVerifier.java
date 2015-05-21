@@ -1,4 +1,4 @@
-package pl.edu.agh.ki.dsrg.sr.bankmanagement.security;
+package pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.security;
 
 import IceSSL.CertificateVerifier;
 import IceSSL.NativeConnectionInfo;

@@ -1,8 +1,10 @@
-package pl.edu.agh.ki.dsrg.sr.bankmanagement.financialnews;
+package pl.edu.agh.ki.dsrg.sr.bankmanagement.ice.financialnews;
 
 import FinancialNews.Currency;
 import FinancialNews._FinancialNewsReceiverDisp;
 import Ice.Current;
+import pl.edu.agh.ki.dsrg.sr.bankmanagement.financialnews.FinancialDataReceiverCallback;
+import pl.edu.agh.ki.dsrg.sr.bankmanagement.financialnews.FinancialDataRepository;
 import pl.edu.agh.ki.dsrg.sr.bankmanagement.util.Pair;
 
 /**

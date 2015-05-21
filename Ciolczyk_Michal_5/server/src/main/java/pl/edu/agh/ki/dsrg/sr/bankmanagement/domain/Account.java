@@ -10,15 +10,15 @@ public interface Account {
 
     void increase(int amount);
 
-    void decrease(int amount);
+    void decrease(int amount) throws IllegalStateException;
 
     int getBalance();
 
-    void makeLoan(int amount, Currency currency, int period);
+    void takeLoan(int amount, Currency currency, int period);
 
     MoneyTransferBuilder transfer(int amount);
 
-    public enum Type {
+    enum Type {
         SILVER {
             @Override
             public Account createAccount(String accountNumber) {
@@ -27,10 +27,14 @@ public interface Account {
         }, PREMIUM {
             @Override
             public Account createAccount(String accountNumber) {
-                return null;
+                return PremiumAccount.create(accountNumber);
             }
         };
 
         public abstract Account createAccount(String accountNumber);
+
+        public static Type fromBankAccountType(Bank.accountType accountType) {
+            return valueOf(accountType.toString());
+        }
     }
 }
