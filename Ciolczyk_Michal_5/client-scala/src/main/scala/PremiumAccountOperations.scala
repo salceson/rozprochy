@@ -1,7 +1,7 @@
 import java.util.{InputMismatchException, Scanner}
 
 import Bank._
-import Ice.{Communicator, FloatHolder, IllegalIdentityException, IntHolder}
+import Ice._
 
 class PremiumAccountOperations(val communicator: Communicator, val scanner: Scanner) {
   private val ACCOUNT_CATEGORY = "acc"
@@ -47,6 +47,8 @@ class PremiumAccountOperations(val communicator: Communicator, val scanner: Scan
       }
     } catch {
       case e: IllegalIdentityException =>
+        throw new NoSuchAccount(e)
+      case e: ObjectNotExistException =>
         throw new NoSuchAccount(e)
     }
   }

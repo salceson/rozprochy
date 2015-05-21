@@ -1,7 +1,7 @@
 import java.util.{InputMismatchException, Scanner}
 
 import Bank._
-import Ice.{Communicator, IllegalIdentityException}
+import Ice.{Communicator, IllegalIdentityException, ObjectNotExistException}
 
 class SilverAccountOperations(val communicator: Communicator, val scanner: Scanner) {
   private val ACCOUNT_CATEGORY = "acc"
@@ -44,6 +44,8 @@ class SilverAccountOperations(val communicator: Communicator, val scanner: Scann
       }
     } catch {
       case e: IllegalIdentityException =>
+        throw new NoSuchAccount(e)
+      case e: ObjectNotExistException =>
         throw new NoSuchAccount(e)
     }
   }
