@@ -75,7 +75,7 @@ public class ZNodeCallback implements StatCallback, Runnable {
             }
             prevData = b;
         }
-        if(b != null && path.equals(znode)) {
+        if (b != null && path.equals(znode)) {
             try {
                 zooKeeper.getChildren(znode, childrenWatcher);
             } catch (KeeperException | InterruptedException e) {

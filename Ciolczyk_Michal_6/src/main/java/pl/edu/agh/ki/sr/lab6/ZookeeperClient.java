@@ -57,7 +57,7 @@ public class ZookeeperClient implements Watcher, Runnable {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-        if(watchedEvent.getType() != Event.EventType.None) {
+        if (watchedEvent.getType() != Event.EventType.None) {
             switch (watchedEvent.getState()) {
                 case SyncConnected:
                     //Not needed now

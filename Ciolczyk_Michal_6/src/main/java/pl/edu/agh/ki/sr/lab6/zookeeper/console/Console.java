@@ -43,7 +43,7 @@ public class Console implements Runnable {
             if ("quit".equals(line) || "q".equals(line)) {
                 callback.quit(0);
             }
-            if("help".equals(line) || "h".equals(line)) {
+            if ("help".equals(line) || "h".equals(line)) {
                 System.out.println("Commands:");
                 System.out.println("\thelp, h\t\t\t- display this help");
                 System.out.println("\tstructure, s\t- display the structure of the watched node (" + znode + ")");
