@@ -38,7 +38,7 @@ public class ZNodeCallback implements StatCallback, Runnable {
                 break;
             case KeeperException.Code.SessionExpired:
             case KeeperException.Code.NoAuth:
-                quit(0);
+                quit(1);
             default:
                 // Retry errors
                 zooKeeper.exists(znode, true, this, null);
