@@ -28,3 +28,7 @@ Zadania:
 
 Zadanie: Aplikacja bankowa
 
+## Laboratorium 6 - ZooKeeper
+
+Zadanie: Watchery i Dzieci
+
