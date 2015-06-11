@@ -27,7 +27,7 @@ public class ZookeeperClient implements Watcher, Runnable {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.err.println("USAGE: ZookeeperClient host:port znode filename program [args ...]");
+            System.err.println("USAGE: ZookeeperClient host:port znode program [args ...]");
             System.exit(2);
         }
         String hostPort = args[0];
