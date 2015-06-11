@@ -93,12 +93,14 @@ public class ZNodeCallback implements StatCallback, Runnable {
         zooKeeper.exists(znode, true, this, null);
     }
 
-    public void quit(int result) {
+    public void quit(int resultCode) {
         if (child != null) {
             child.destroy();
             child = null;
         }
-        logger.error("Session broken");
-        System.exit(result);
+        if (resultCode != 0) {
+            logger.error("Session broken");
+        }
+        System.exit(resultCode);
     }
 }
