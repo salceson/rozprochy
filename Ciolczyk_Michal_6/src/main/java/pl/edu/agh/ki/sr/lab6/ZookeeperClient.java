@@ -20,7 +20,6 @@ public class ZookeeperClient implements Watcher, Runnable {
     private ZooKeeper zooKeeper;
     private final String hostPort;
     private final String znode;
-    private final String filename;
     private final String exec[];
     private static final Logger logger = LoggerFactory.getLogger(ZookeeperClient.class);
     private ZNodeCallback callback;
@@ -33,11 +32,10 @@ public class ZookeeperClient implements Watcher, Runnable {
         }
         String hostPort = args[0];
         String znode = args[1];
-        String filename = "troll.txt";
         String exec[] = new String[args.length - 2];
         System.arraycopy(args, 2, exec, 0, exec.length);
         try {
-            new Thread(new ZookeeperClient(hostPort, znode, filename, exec)).start();
+            new Thread(new ZookeeperClient(hostPort, znode, exec)).start();
         } catch (Exception e) {
             logger.error("Caught an exception: ", e);
         }
