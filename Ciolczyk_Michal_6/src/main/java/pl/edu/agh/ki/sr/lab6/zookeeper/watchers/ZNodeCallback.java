@@ -56,7 +56,7 @@ public class ZNodeCallback implements StatCallback, Runnable {
                 return;
             }
         }
-        if ((b == null && b != prevData) || (b != null && !Arrays.equals(prevData, b)) && znode.equals(path)) {
+        if (znode.equals(path) && ((b == null && b != prevData) || (b != null && !Arrays.equals(prevData, b)))) {
             if (b != null) {
                 if (child != null) {
                     child.destroy();
