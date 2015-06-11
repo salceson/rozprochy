@@ -36,6 +36,8 @@ public class Console implements Runnable {
             if ("structure".equals(line) || "s".equals(line)) {
                 try {
                     printStructure(znode);
+                } catch (KeeperException.NoNodeException ignored) {
+
                 } catch (KeeperException | InterruptedException e) {
                     logger.error("Caught an exception", e);
                 }
@@ -54,7 +56,6 @@ public class Console implements Runnable {
 
     private void printStructure(String znode) throws KeeperException, InterruptedException {
         printStructure(znode, 0);
-        System.out.println();
     }
 
     private void printStructure(String path, int indent) throws KeeperException, InterruptedException {
@@ -62,8 +63,11 @@ public class Console implements Runnable {
 
         try {
             children = zooKeeper.getChildren(path, false);
+        } catch (KeeperException.NoNodeException ignored) {
+            System.out.println("No node named " + znode);
+            return;
         } catch (KeeperException e) {
-            logger.info("No node named " + znode + " or another exception: ", e);
+            logger.info("Caught an exception: ", e);
             return;
         }
 
